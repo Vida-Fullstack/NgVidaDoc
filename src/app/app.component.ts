@@ -21,5 +21,6 @@ export class AppComponent {
 
   constructor() {
     this.#router.navigate([localStorage.getItem('@redirect') || '']);
+    localStorage.removeItem('@redirect');
   }
 }

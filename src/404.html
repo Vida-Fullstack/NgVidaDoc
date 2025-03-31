@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Not Found</title>
     <script type="text/javascript">
-      let currentPath = window.location.pathname;
+      const fullPath = window.location.pathname;
+      const pathSegments = fullPath.split("/").slice(2).join("/");
 
-      localStorage.setItem("@redirect", currentPath);
+      localStorage.setItem("@redirect", pathSegments);
     </script>
   </head>
   <body>
