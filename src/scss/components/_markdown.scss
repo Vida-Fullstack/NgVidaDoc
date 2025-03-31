@@ -1,0 +1,76 @@
+@use "@tools/rem-calc" as fn;
+
+markdown {
+  color: var(--black) !important;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+
+  h1 {
+    font-size: fn.rem-calc(28);
+    font-weight: bold;
+    margin-bottom: fn.rem-calc(14);
+    color: var(--primary);
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: fn.rem-calc(21);
+    font-weight: bold;
+    margin-bottom: fn.rem-calc(12);
+    color: var(--primary);
+  }
+
+  p {
+    margin-bottom: fn.rem-calc(14);
+  }
+
+  a {
+    color: var(--blue);
+  }
+
+  ul,
+  ol {
+    margin-bottom: fn.rem-calc(14);
+    padding-left: fn.rem-calc(24);
+  }
+
+  li {
+    margin-bottom: fn.rem-calc(7);
+  }
+
+  blockquote {
+    border-left: fn.rem-calc(4) solid var(--gray-030);
+    padding-left: fn.rem-calc(14);
+    font-style: italic;
+    color: var(--gray-060);
+    margin: fn.rem-calc(14) 0;
+  }
+
+  pre {
+    background: var(--gray-010);
+    padding: fn.rem-calc(21);
+    margin: fn.rem-calc(14) 0;
+    border-radius: fn.rem-calc(7);
+    overflow-x: auto;
+    font-family: "Courier New", monospace;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: fn.rem-calc(14);
+  }
+
+  th,
+  td {
+    border: fn.rem-calc(1) solid var(--gray-030);
+    padding: fn.rem-calc(10);
+    text-align: left;
+  }
+
+  th {
+    background: var(--gray-020);
+    font-weight: bold;
+  }
+}

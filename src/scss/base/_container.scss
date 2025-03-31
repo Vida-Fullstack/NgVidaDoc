@@ -1,0 +1,5 @@
+@use "@tools/rem-calc" as fn;
+
+.container.container-wraper {
+  padding: fn.rem-calc(21);
+}

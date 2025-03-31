@@ -1,0 +1,42 @@
+<header>
+  <div>
+    <nav>
+      <a>
+        <figure>
+          <img src="assets/images/logo.png" alt="Documentações" />
+        </figure>
+      </a>
+
+      <section>
+        <ul>
+          @for (page of getPages(); track $index;) {
+          <li>
+            <a
+              [routerLink]="[page.router]"
+              [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >{{ page.title }}</a
+            >
+            @if(page.subMenu){
+            <ul>
+              @for (sub of page.subMenu; track $index;) {
+              <li>
+                <a
+                  [routerLink]="[sub.router]"
+                  [routerLinkActive]="'active'"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  >{{ sub.title }}</a
+                >
+              </li>
+              }
+            </ul>
+            }
+          </li>
+          } @empty {
+          <li>Nenhuma página cadastrada!</li>
+          }
+        </ul>
+      </section>
+    </nav>
+  </div>
+</header>

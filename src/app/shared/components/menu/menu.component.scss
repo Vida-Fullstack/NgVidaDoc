@@ -1,0 +1,98 @@
+@use "@tools/rem-calc" as fn;
+
+:host {
+  display: block;
+
+  header {
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    width: fn.rem-calc(300);
+
+    div {
+      position: relative;
+      overflow: hidden;
+
+      nav {
+        position: relative;
+        height: 100vh;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        width: fn.rem-calc(300);
+        border-right: var(--gray) fn.rem-calc(1) solid;
+
+        overflow: hidden;
+        background: var(--white);
+        padding: fn.rem-calc(28) fn.rem-calc(21);
+
+        a {
+          width: fit-content;
+
+          figure {
+            margin: 0;
+            overflow: hidden;
+            margin-left: fn.rem-calc(7);
+          }
+        }
+
+        section {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          height: 100%;
+          overflow-y: auto;
+          background: none;
+          border: none;
+          cursor: initial;
+          padding: 0;
+          margin: 0;
+          margin-top: fn.rem-calc(21);
+
+          ul {
+            li {
+              margin-top: fn.rem-calc(7);
+              a {
+                cursor: pointer;
+                color: var(--black);
+                text-decoration: none;
+                font-weight: bold;
+                padding: fn.rem-calc(7) fn.rem-calc(14);
+                width: 100%;
+                transition: 0.5s;
+                display: flex;
+                align-items: center;
+
+                &:hover,
+                &.active {
+                  background: var(--gray-010);
+                  border-radius: fn.rem-calc(7);
+                }
+              }
+
+              ul {
+                li {
+                  margin-left: fn.rem-calc(14);
+                  a {
+                    font-weight: lighter;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media (max-width: 845px) {
+      &,
+      div,
+      nav {
+        width: 100%;
+        position: fixed;
+      }
+    }
+  }
+}
