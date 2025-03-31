@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { MenuComponent } from './shared/components/menu/menu.component';
 
 @Component({
@@ -16,4 +16,10 @@ import { MenuComponent } from './shared/components/menu/menu.component';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class AppComponent {
+  #router = inject(Router);
+
+  constructor() {
+    this.#router.navigate([localStorage.getItem('@redirect') || '']);
+  }
+}
