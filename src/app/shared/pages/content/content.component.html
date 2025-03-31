@@ -7,7 +7,7 @@
 </markdown>
 
 <section>
-  @if(getPagination()?.previous){
+  @if(getPagination().previous){
   <a [routerLink]="[getPagination().previous?.router]">
     <span>
       <svg
@@ -51,7 +51,7 @@
   }
 
   <!--  -->
-  @if(getPagination()?.next){
+  @if(getPagination().next){
   <a [routerLink]="[getPagination().next?.router]">
     <span>
       Próxima página
