@@ -26,7 +26,8 @@ export class AppComponent {
         ?.replace(/^\/+|\/+$/g, '')
         ?.split('/') || '';
 
-    this.#router.navigate([redirect]);
+    console.log(redirect);
+    this.#router.navigate([...redirect]);
     localStorage.removeItem('@redirect');
   }
 }
