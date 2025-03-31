@@ -95,26 +95,26 @@ export class ContentService {
           (event): event is NavigationEnd => event instanceof NavigationEnd
         ),
         map(() => this.#router.url),
-        tap((currentUrl) => {
-          if (currentUrl === '/') {
-            const firstPage = this.getPages()[0];
-            if (firstPage) {
-              this.#router.navigate([firstPage.router]);
-            }
-          }
-        }),
         tap((currentUrl) => this.#updatePagination(currentUrl)),
         switchMap((currentUrl) => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          const file = this.#findFileByUrl(currentUrl);
 
-          if (!file) {
-            console.warn(`Rota não encontrada: ${currentUrl}`);
-            this.#router.navigate(['/404']); // 🔥 Redireciona para a página 404
-            return EMPTY;
+          if (currentUrl === '/') {
+            const firstPage = this.getPages()[0];
+            if (firstPage.router) {
+              return this.#router.navigate([firstPage.router]);
+            }
           }
 
-          return file ? this.getMarkdownFile(file) : EMPTY;
+          const file = this.#findFileByUrl(currentUrl);
+
+          if (file) {
+            return this.getMarkdownFile(file);
+          }
+
+          console.warn(`Rota não encontrada: ${currentUrl}`);
+          this.#router.navigate(['/404']);
+          return EMPTY;
         })
       )
       .subscribe();

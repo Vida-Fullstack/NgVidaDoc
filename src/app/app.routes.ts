@@ -14,5 +14,5 @@ export const routes: Routes = [
     path: ':menu/:subMenu',
     loadComponent: () => import('./shared/pages/content/content.component'),
   },
-  { path: '**', pathMatch: 'full', redirectTo: '404' },
+  { path: '**', redirectTo: '' },
 ];

@@ -2,7 +2,12 @@
 <header>
   <div>
     <nav>
-      <a>
+      <a
+        [routerLink]="['/']"
+        [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="toggleMenu()"
+      >
         <figure>
           <img src="assets/images/logo.png" alt="Documentações" />
         </figure>
