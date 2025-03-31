@@ -49,7 +49,7 @@ O Zod é uma biblioteca TypeScript-first para validação de esquemas de dados. 
 
 ### 🔹 Como usar
 
-```
+```typescript
 import { z } from "zod";
 
 const userSchema = z.object({
@@ -124,7 +124,7 @@ Permite ajustar tamanhos facilmente.
 
 ### 📌 Arquivo: scss/tools/rem-calc.scss
 
-```
+```typescript
 @function rem-calc($size) {
     $value: calc($size / 16);
     @return #{$value}rem;
@@ -135,7 +135,7 @@ Permite ajustar tamanhos facilmente.
 
 Para utilizar a função no projeto, basta importar o arquivo rem-calc.scss:
 
-```
+```typescript
 @use '@tools/rem-calc' as fn;
 
 .element {
@@ -146,7 +146,7 @@ Para utilizar a função no projeto, basta importar o arquivo rem-calc.scss:
 
 ## 🛠️ Cypress local
 
-```
+```typescript
 npx cypress cache clear
 npx cypress install --force
 ```
@@ -159,20 +159,20 @@ Para garantir qualidade de código e evitar commits com erros, este projeto usa 
 
 ### ✅ 1 - Inicialize o Husky:
 
-```
+```typescript
 npx husky init
 ```
 
 ### ✅ 2 - No arquivo .husky/pre-commit, substitua:
 
-```
+```typescript
 #!/usr/bin/env sh
 npx lint-staged
 ```
 
 ### ✅ 3 - No arquivo .husky/\_/husky.sh, substitua:
 
-```
+```typescript
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 ```

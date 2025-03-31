@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { ContentService } from '../../service/content.service';
+
+declare var hljs: any;
 
 @Component({
   selector: 'app-content',
@@ -11,8 +19,24 @@ import { ContentService } from '../../service/content.service';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ContentComponent {
+export default class ContentComponent implements OnInit {
   #contentService = inject(ContentService);
+  #elementRef = inject(ElementRef);
   public getSelectedPageContent = this.#contentService.getSelectedPageContent;
   public getPagination = this.#contentService.getPagination;
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.#highlightCode();
+    }, 50);
+  }
+
+  #highlightCode(): void {
+    const blocks = this.#elementRef.nativeElement.querySelectorAll(
+      'pre code[class*="language-"]'
+    );
+    blocks.forEach((block: any) => {
+      hljs.highlightElement(block);
+    });
+  }
 }
