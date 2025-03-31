@@ -2,7 +2,7 @@
 
 :host {
   display: block;
-
+  z-index: 999;
   header {
     position: relative;
     height: 100vh;
@@ -85,14 +85,31 @@
         }
       }
     }
+  }
 
-    @media (max-width: 845px) {
-      &,
-      div,
-      nav {
-        width: 100%;
-        position: fixed;
-      }
+  .toggle-menu {
+    display: none;
+    position: fixed;
+    bottom: fn.rem-calc(31);
+    right: fn.rem-calc(31);
+
+    background: var(--white);
+    width: fn.rem-calc(50);
+    height: fn.rem-calc(50);
+    border-radius: fn.rem-calc(100);
+  }
+
+  @media (max-width: 845px) {
+    header,
+    header div,
+    nav,
+    header div nav {
+      width: 100% !important;
+      position: fixed;
+    }
+
+    .toggle-menu {
+      display: block;
     }
   }
 }

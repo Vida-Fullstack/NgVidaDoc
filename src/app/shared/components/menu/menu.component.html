@@ -1,3 +1,4 @@
+@if(isToggleMenu()){
 <header>
   <div>
     <nav>
@@ -15,6 +16,7 @@
               [routerLink]="[page.router]"
               [routerLinkActive]="'active'"
               [routerLinkActiveOptions]="{ exact: true }"
+              (click)="toggleMenu()"
               >{{ page.title }}</a
             >
             @if(page.subMenu){
@@ -25,6 +27,7 @@
                   [routerLink]="[sub.router]"
                   [routerLinkActive]="'active'"
                   [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="toggleMenu()"
                   >{{ sub.title }}</a
                 >
               </li>
@@ -40,3 +43,60 @@
     </nav>
   </div>
 </header>
+}
+<button type="button" class="toggle-menu" (click)="toggleMenu()">
+  @if(!isToggleMenu()){
+  <svg
+    width="25"
+    height="25"
+    viewBox="0 0 25 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <mask
+      id="mask0_1482_7"
+      style="mask-type: alpha"
+      maskUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      width="25"
+      height="25"
+    >
+      <rect x="0.244141" y="0.633789" width="24" height="24" fill="#D9D9D9" />
+    </mask>
+    <g mask="url(#mask0_1482_7)">
+      <path
+        d="M3.24414 18.6338V16.6338H21.2441V18.6338H3.24414ZM3.24414 13.6338V11.6338H21.2441V13.6338H3.24414ZM3.24414 8.63379V6.63379H21.2441V8.63379H3.24414Z"
+        fill="#1C1B1F"
+      />
+    </g>
+  </svg>
+  } @else {
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <mask
+      id="mask0_1482_13"
+      style="mask-type: alpha"
+      maskUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      width="24"
+      height="24"
+    >
+      <rect width="24" height="24" fill="#D9D9D9" />
+    </mask>
+    <g mask="url(#mask0_1482_13)">
+      <path
+        d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z"
+        fill="#1C1B1F"
+      />
+    </g>
+  </svg>
+
+  }
+</button>
