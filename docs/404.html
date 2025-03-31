@@ -7,7 +7,7 @@
     <script type="text/javascript">
       const fullPath = window.location.pathname;
       const pathSegments = fullPath.split("/").slice(2).join("/");
-      console.log(pathSegments)
+      console.log(fullPath.split("/")[0])
       localStorage.setItem("@redirect", pathSegments);
       // window.location.href = "./";
     </script>
