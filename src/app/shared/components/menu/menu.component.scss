@@ -89,6 +89,9 @@
 
   .toggle-menu {
     display: none;
+    align-items: center;
+    justify-content: center;
+
     position: fixed;
     bottom: fn.rem-calc(31);
     right: fn.rem-calc(31);
@@ -110,7 +113,7 @@
     }
 
     .toggle-menu {
-      display: block;
+      display: flex;
     }
   }
 }
