@@ -8,8 +8,10 @@
       const fullPath = window.location.pathname;
       const pathSegments = fullPath.split("/").slice(2).join("/");
 
+            console.log(pathSegments);
+
       localStorage.setItem("@redirect", pathSegments);
-      window.location.href = "./";
+      // window.location.href = "./";
     </script>
   </head>
   <body>
