@@ -97,6 +97,7 @@
     width: fn.rem-calc(50);
     height: fn.rem-calc(50);
     border-radius: fn.rem-calc(100);
+    border: fn.rem-calc(2) solid var(--black);
   }
 
   @media (max-width: 845px) {

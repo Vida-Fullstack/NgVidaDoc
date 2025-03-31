@@ -32,4 +32,15 @@
       }
     }
   }
+
+  @media (max-width: fn.rem-calc(845)) {
+    section {
+      display: block;
+
+      a {
+        width: 100%;
+        margin-bottom: fn.rem-calc(14);
+      }
+    }
+  }
 }

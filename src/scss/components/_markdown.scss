@@ -48,12 +48,14 @@ markdown {
   }
 
   pre {
-    background: var(--gray-010);
+    background: var(--black);
+
     padding: fn.rem-calc(21);
     margin: fn.rem-calc(14) 0;
     border-radius: fn.rem-calc(7);
     overflow-x: auto;
     font-family: "Courier New", monospace;
+    color: var(--gray-010);
   }
 
   table {
