@@ -6,8 +6,11 @@
     <title>Page Not Found</title>
     <script type="text/javascript">
       const currentPath = window.location.pathname;
-      window.location.href =
-        currentPath.substring(0, currentPath.lastIndexOf("/")) + "/";
+
+      console.log(currentPath);
+      console.log(currentPath.substring(0, currentPath.lastIndexOf("/")) + "/");
+      // window.location.href =
+      //   currentPath.substring(0, currentPath.lastIndexOf("/")) + "/";
     </script>
   </head>
   <body>
