@@ -20,14 +20,14 @@ export class AppComponent {
   #router = inject(Router);
 
   constructor() {
-    const redirect =
-      localStorage
-        .getItem('@redirect')
-        ?.replace(/^\/+|\/+$/g, '')
-        ?.split('/') || '';
+    const redirect = localStorage.getItem('@redirect');
 
     console.log(redirect);
-    this.#router.navigate([...redirect]);
-    localStorage.removeItem('@redirect');
+    if (redirect) {
+      this.#router.navigate([
+        ...(redirect?.replace(/^\/+|\/+$/g, '')?.split('/') || ''),
+      ]);
+      localStorage.removeItem('@redirect');
+    }
   }
 }

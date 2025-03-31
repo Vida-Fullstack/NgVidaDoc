@@ -45,7 +45,6 @@ export class ContentService {
     this.#fetchPagesConfig()
       .pipe(
         tap((pages) => {
-          console.log(pages);
           return this.#setPages.set(pages);
         })
       )
@@ -108,6 +107,13 @@ export class ContentService {
         switchMap((currentUrl) => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
           const file = this.#findFileByUrl(currentUrl);
+
+          if (!file) {
+            console.warn(`Rota não encontrada: ${currentUrl}`);
+            this.#router.navigate(['/404']); // 🔥 Redireciona para a página 404
+            return EMPTY;
+          }
+
           return file ? this.getMarkdownFile(file) : EMPTY;
         })
       )
@@ -158,8 +164,6 @@ export class ContentService {
         });
       }
     });
-
-    console.log('Flattened Pages:', result);
 
     return result;
   }
