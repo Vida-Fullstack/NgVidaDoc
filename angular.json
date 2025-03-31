@@ -50,6 +50,7 @@
                 "base": "docs",
                 "browser": ""
               },
+              "baseHref": "./",
               "outputHashing": "all"
             },
             "development": {
