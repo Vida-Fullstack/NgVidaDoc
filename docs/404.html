@@ -6,11 +6,15 @@
     <title>Page Not Found</title>
     <script type="text/javascript">
       const fullPath = window.location.pathname;
-            console.log(fullPath.split("/"))
       const pathSegments = fullPath.split("/").slice(2).join("/");
-      console.log(fullPath.split("/"))
+
       localStorage.setItem("@redirect", pathSegments);
-      // window.location.href = "./";
+      
+      window.location.href = fullPath
+        .split("/")
+        .filter(Boolean)
+        .slice(1)
+        .join("/")[0];
     </script>
   </head>
   <body>
