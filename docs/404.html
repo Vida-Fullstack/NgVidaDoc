@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Not Found</title>
     <script type="text/javascript">
+      const pathname = window.location.pathname
   localStorage.setItem(
         "@redirect",
-        window.location.pathname.split("/").slice(2).join("/")
+       pathname.split("/").slice(2).join("/")
       );
-  console.log(window.location.pathname
-        .split("/")
-        .filter(Boolean)[0])
+      
+window.location.href = '/' + pathname.split("/").slice(1)[0]
 
     </script>
   </head>
