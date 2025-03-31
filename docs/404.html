@@ -9,12 +9,13 @@
       const pathSegments = fullPath.split("/").slice(2).join("/");
 
       localStorage.setItem("@redirect", pathSegments);
-      
-      window.location.href = fullPath
+
+      console.log(fullPath
         .split("/")
         .filter(Boolean)
         .slice(1)
-        .join("/")[0];
+        .join("/")[0])
+
     </script>
   </head>
   <body>
