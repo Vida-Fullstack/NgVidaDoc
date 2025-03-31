@@ -6,8 +6,9 @@
     <title>Page Not Found</title>
     <script type="text/javascript">
       const fullPath = window.location.pathname;
+            console.log(fullPath.split("/"))
       const pathSegments = fullPath.split("/").slice(2).join("/");
-      console.log(fullPath.split("/")[0])
+      console.log(fullPath.split("/"))
       localStorage.setItem("@redirect", pathSegments);
       // window.location.href = "./";
     </script>
