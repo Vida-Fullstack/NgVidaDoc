@@ -39,10 +39,10 @@ markdown {
   }
 
   blockquote {
-    border-left: fn.rem-calc(4) solid var(--gray-030);
+    border-left: fn.rem-calc(4) solid var(--gray-010);
     padding-left: fn.rem-calc(14);
     font-style: italic;
-    color: var(--gray-060);
+    color: var(--gray);
     margin: fn.rem-calc(14) 0;
   }
 
@@ -65,13 +65,17 @@ markdown {
 
   th,
   td {
-    border: fn.rem-calc(1) solid var(--gray-030);
+    border: fn.rem-calc(1) solid var(--gray-010);
     padding: fn.rem-calc(10);
     text-align: left;
   }
 
   th {
-    background: var(--gray-020);
+    background: var(--gray-010);
     font-weight: bold;
+  }
+
+  img {
+    width: 100%;
   }
 }
