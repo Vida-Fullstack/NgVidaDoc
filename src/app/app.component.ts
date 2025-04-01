@@ -27,9 +27,8 @@ export class AppComponent {
     const redirect = localStorage.getItem('@redirect');
 
     if (redirect) {
-      alert(redirect?.replaceAll(/^\/+|\/+$/g, '').split('/'));
       this.#router.navigate([
-        ...(redirect?.replaceAll(/^\/+|\/+$/g, '').split('/') || ''),
+        redirect?.replaceAll(/^\/+|\/+$/g, '').split('/') || '',
       ]);
       localStorage.removeItem('@redirect');
     }
