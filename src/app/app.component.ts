@@ -33,7 +33,10 @@ export class AppComponent implements OnInit {
       const redirect = localStorage.getItem('@redirect');
 
       if (redirect) {
-        this.#router.navigateByUrl(`./${redirect}`);
+        console.log(`/${redirect}`);
+        this.#router.navigateByUrl(`/`);
+        this.#router.navigateByUrl(`/${redirect}`);
+
         return localStorage.removeItem('@redirect');
       }
 
