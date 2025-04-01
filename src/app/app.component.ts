@@ -8,11 +8,12 @@ import { MenuComponent } from './shared/components/menu/menu.component';
   template: `
     <div class="d-flex">
       <app-menu />
-      <main class="container container-wraper">
+      <main class="container-fluid container-wraper">
         <router-outlet />
       </main>
     </div>
   `,
+  styleUrl: './app.component.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

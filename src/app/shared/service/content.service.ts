@@ -46,7 +46,6 @@ export class ContentService {
     this.#fetchPagesConfig()
       .pipe(
         tap((pages) => {
-          console.log(pages);
           return this.#setPages.set(pages);
         })
       )
