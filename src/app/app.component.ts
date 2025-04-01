@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       const redirect = localStorage.getItem('@redirect');
 
       if (redirect) {
-        window.location.href = `/${redirect}`;
+        window.location.href = `./${redirect}`;
         return localStorage.removeItem('@redirect');
       }
 
