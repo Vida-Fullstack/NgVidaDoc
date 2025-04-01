@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuComponent } from './shared/components/menu/menu.component';
+import { ContentService } from './shared/service/content.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +23,10 @@ import { MenuComponent } from './shared/components/menu/menu.component';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   #router = inject(Router);
+  #contentService = inject(ContentService);
+  public getPages = this.#contentService.getPages;
 
   constructor() {
     const redirect = localStorage.getItem('@redirect');
@@ -29,5 +37,11 @@ export class AppComponent {
       ]);
       localStorage.removeItem('@redirect');
     }
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.#router.navigate([this.getPages()[0].router]);
+    }, 500);
   }
 }

@@ -1,9 +1,9 @@
 import {
+  AfterContentChecked,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
-  OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -19,13 +19,13 @@ declare var hljs: any;
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ContentComponent implements OnInit {
+export default class ContentComponent implements AfterContentChecked {
   #contentService = inject(ContentService);
   #elementRef = inject(ElementRef);
   public getSelectedPageContent = this.#contentService.getSelectedPageContent;
   public getPagination = this.#contentService.getPagination;
 
-  ngOnInit(): void {
+  ngAfterContentChecked(): void {
     setTimeout(() => {
       this.#highlightCode();
     }, 50);

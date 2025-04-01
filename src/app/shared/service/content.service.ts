@@ -45,12 +45,12 @@ export class ContentService {
   #init(): void {
     this.#fetchPagesConfig()
       .pipe(
-        tap((pages) => {
-          return this.#setPages.set(pages);
-        })
+        map((pages) => {
+          this.#setPages.set(pages);
+        }),
+        switchMap(() => this.#listenToRouterChanges())
       )
       .subscribe({
-        next: (res) => this.#listenToRouterChanges(res),
         error: (err) => console.error('Erro ao carregar configurações:', err),
       });
   }
@@ -83,37 +83,35 @@ export class ContentService {
     );
   }
 
-  #listenToRouterChanges(pages: IPage[]): void {
-    this.#router.events
-      .pipe(
-        filter(
-          (event): event is NavigationEnd => event instanceof NavigationEnd
-        ),
-        map(() => this.#router.url),
-        tap((currentUrl) => this.#updatePagination(currentUrl)),
-        switchMap((currentUrl) => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+  #listenToRouterChanges(): Observable<string | boolean> {
+    return this.#router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map(() => {
+        return this.#router.url;
+      }),
+      tap((currentUrl) => this.#updatePagination(currentUrl)),
+      switchMap((currentUrl) => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (currentUrl === '/') {
+          const firstPage = this.getPages()[0];
 
-          if (currentUrl === '/') {
-            const firstPage = this.getPages()[0];
-            if (firstPage.router) {
-              return this.#router.navigate([firstPage.router]);
-            }
+          if (firstPage.router) {
+            return this.#router.navigate([firstPage.router]);
           }
+        }
 
-          const file = this.#findFileByUrl(currentUrl);
-          this.#title.setTitle(`${file?.title} - Documentação`);
+        const file = this.#findFileByUrl(currentUrl);
+        this.#title.setTitle(`${file?.title} - Documentação`);
 
-          if (file?.file) {
-            return this.#getMarkdownFile(file?.file);
-          }
+        if (file?.file) {
+          return this.#getMarkdownFile(file?.file);
+        }
 
-          console.warn(`Rota não encontrada: ${currentUrl}`);
-          this.#router.navigate(['/404']);
-          return EMPTY;
-        })
-      )
-      .subscribe();
+        console.warn(`Rota não encontrada: ${currentUrl}`);
+        this.#router.navigate(['/404']);
+        return EMPTY;
+      })
+    );
   }
 
   #formatRouter(title: string, file: string | undefined = undefined): string {
@@ -150,7 +148,6 @@ export class ContentService {
 
   #updatePagination(currentUrl: string): void {
     const allPages: IPage[] = this.#flattenPages(this.getPages());
-
     const currentIndex = allPages.findIndex(
       (page) => page.router === currentUrl
     );
