@@ -1,5 +1,9 @@
 @use "@tools/rem-calc" as fn;
 
 .container.container-wraper {
-  padding: fn.rem-calc(21);
+  padding: fn.rem-calc(50) fn.rem-calc(120);
+
+  @media (max-width: fn.rem-calc(845)) {
+    padding: fn.rem-calc(50);
+  }
 }

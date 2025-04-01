@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
+
 import {
   catchError,
   EMPTY,
@@ -11,8 +13,8 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
+import { PAGES_CONFIG } from '../../../../public/doc/app-pages.config';
 
-import { PAGES_CONFIG } from '../../app-pages.config';
 import { IPage } from '../interface/IPage.interface';
 
 @Injectable({
@@ -21,6 +23,7 @@ import { IPage } from '../interface/IPage.interface';
 export class ContentService {
   readonly #router = inject(Router);
   readonly #http = inject(HttpClient);
+  readonly #title = inject(Title);
 
   readonly #setSelectedPageContent = signal<string>('');
   get getSelectedPageContent(): Signal<string> {
@@ -45,16 +48,17 @@ export class ContentService {
     this.#fetchPagesConfig()
       .pipe(
         tap((pages) => {
+          console.log(pages);
           return this.#setPages.set(pages);
         })
       )
       .subscribe({
-        next: () => this.#listenToRouterChanges(),
+        next: (res) => this.#listenToRouterChanges(res),
         error: (err) => console.error('Erro ao carregar configurações:', err),
       });
   }
 
-  public getMarkdownFile(file: string): Observable<string> {
+  #getMarkdownFile(file: string): Observable<string> {
     return this.#http.get(`doc/${file}`, { responseType: 'text' }).pipe(
       tap((content) => this.#setSelectedPageContent.set(content)),
       catchError(() => {
@@ -71,24 +75,18 @@ export class ContentService {
         pages.map((page) => ({
           ...page,
           router: `/${this.#formatRouter(page.title)}`,
-          file: `${this.#formatRouter(page.title)}/${this.#formatRouter(
-            page.title
-          )}.md`,
+          file: `${this.#formatRouter(page.title, page.title)}.md`,
           subMenu: page.subMenu?.map((subMenu) => ({
             ...subMenu,
-            router: `/${this.#formatRouter(page.title)}/${this.#formatRouter(
-              subMenu.title
-            )}`,
-            file: `${this.#formatRouter(page.title)}/${this.#formatRouter(
-              subMenu.title
-            )}.md`,
+            router: `/${this.#formatRouter(page.title, subMenu.title)}`,
+            file: `${this.#formatRouter(page.title, subMenu.title)}.md`,
           })),
         }))
       )
     );
   }
 
-  #listenToRouterChanges(): void {
+  #listenToRouterChanges(pages: IPage[]): void {
     this.#router.events
       .pipe(
         filter(
@@ -107,9 +105,10 @@ export class ContentService {
           }
 
           const file = this.#findFileByUrl(currentUrl);
+          this.#title.setTitle(`${file?.title} - Documentação`);
 
-          if (file) {
-            return this.getMarkdownFile(file);
+          if (file?.file) {
+            return this.#getMarkdownFile(file?.file);
           }
 
           console.warn(`Rota não encontrada: ${currentUrl}`);
@@ -120,16 +119,36 @@ export class ContentService {
       .subscribe();
   }
 
-  #formatRouter(title: string): string {
-    return title.trim().replace(/\s+/g, '-').toLowerCase();
+  #formatRouter(title: string, file: string | undefined = undefined): string {
+    const setTile = this.#formtRouterSlug(title);
+
+    if (file) {
+      const setFile = this.#formtRouterSlug(file);
+
+      return `${setTile}/${setFile}`;
+    }
+
+    return `${setTile}`;
   }
 
-  #findFileByUrl(currentUrl: string): string | undefined {
+  #formtRouterSlug(path: string) {
+    return path
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
+  #findFileByUrl(currentUrl: string) {
     const allPages = [
       ...this.getPages(),
       ...this.getPages().flatMap((p) => p.subMenu || []),
     ];
-    return allPages.find((page) => page.router === currentUrl)?.file;
+
+    return allPages.find((page) => page.router === currentUrl);
   }
 
   #updatePagination(currentUrl: string): void {

@@ -7,18 +7,17 @@ markdown {
 
   h1 {
     font-size: fn.rem-calc(28);
-    font-weight: bold;
+    font-weight: 999;
     margin-bottom: fn.rem-calc(14);
-    color: var(--primary);
   }
 
   h2,
   h3,
   h4 {
     font-size: fn.rem-calc(21);
-    font-weight: bold;
+    font-weight: 999;
+
     margin-bottom: fn.rem-calc(12);
-    color: var(--primary);
   }
 
   p {

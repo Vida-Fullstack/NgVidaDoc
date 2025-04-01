@@ -6,6 +6,7 @@
   <p>Escolha a página para a qual deseja ir.</p>
 </markdown>
 
+@if(getPagination().previous || getPagination().next){
 <section>
   @if(getPagination().previous){
   <a [routerLink]="[getPagination().previous?.router]">
@@ -94,3 +95,15 @@
   </a>
   }
 </section>
+
+<footer>
+  <p>
+    &#64;Desenvolvido por
+    <a
+      href="https://www.linkedin.com/in/dener-s%C3%A3o-pedro-troquatte-ababa079/"
+      target="_blank"
+      >Dener Troquatte</a
+    >
+  </p>
+</footer>
+}

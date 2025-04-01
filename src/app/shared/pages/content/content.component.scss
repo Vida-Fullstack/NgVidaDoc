@@ -33,6 +33,11 @@
     }
   }
 
+  footer {
+    font-size: fn.rem-calc(14);
+    padding: fn.rem-calc(21) 0;
+  }
+
   @media (max-width: fn.rem-calc(845)) {
     section {
       display: block;

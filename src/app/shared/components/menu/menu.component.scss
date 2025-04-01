@@ -103,7 +103,7 @@
     border: fn.rem-calc(2) solid var(--black);
   }
 
-  @media (max-width: 845px) {
+  @media (max-width: fn.rem-calc(845)) {
     header,
     header div,
     nav,
