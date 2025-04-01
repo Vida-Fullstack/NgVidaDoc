@@ -33,15 +33,12 @@ export class AppComponent implements OnInit {
       const redirect = localStorage.getItem('@redirect');
 
       if (redirect) {
-        this.#router.navigate([
-          `${redirect?.replaceAll(/^\/+|\/+$/g, '').split('/')}` ||
-            this.getPages()[0].router,
-        ]);
+        window.location.href = `/${redirect}`;
         return localStorage.removeItem('@redirect');
       }
 
       if (this.#router.url === '/') {
-        this.#router.navigate([this.getPages()[0].router]);
+        return this.#router.navigate([this.getPages()[0].router]);
       }
     }, 1000);
   }
