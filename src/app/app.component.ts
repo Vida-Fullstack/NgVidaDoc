@@ -41,7 +41,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.#router.navigate([this.getPages()[0].router]);
+      if (this.#router.url === '/') {
+        this.#router.navigate([this.getPages()[0].router]);
+      }
     }, 500);
   }
 }
