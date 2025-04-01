@@ -44,6 +44,6 @@ export class AppComponent implements OnInit {
       if (this.#router.url === '/') {
         this.#router.navigate([this.getPages()[0].router]);
       }
-    }, 500);
+    }, 1000);
   }
 }
