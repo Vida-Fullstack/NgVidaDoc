@@ -9,11 +9,9 @@ import {
   filter,
   map,
   Observable,
-  of,
   switchMap,
   tap,
 } from 'rxjs';
-import { PAGES_CONFIG } from '../../../../public/doc/app-pages.config';
 
 import { IPage } from '../interface/IPage.interface';
 
@@ -70,7 +68,7 @@ export class ContentService {
   }
 
   #fetchPagesConfig(): Observable<IPage[]> {
-    return of(PAGES_CONFIG).pipe(
+    return this.#http.get<IPage[]>('doc/app-pages.config.json').pipe(
       map((pages) =>
         pages.map((page) => ({
           ...page,
